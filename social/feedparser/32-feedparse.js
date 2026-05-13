@@ -31,7 +31,14 @@ module.exports = function(RED) {
                     node.status({fill:"red",shape:"dot",text:response.status+": "+RED._("feedparse.errors.badstatuscode")})
                     return
                 }
-                const feed = parseFeed(await response.text())
+                try {
+                    const feed = parseFeed(await response.text())
+                }
+                catch (error) {
+                    node.error("Failed Parse: "+node.url, error)
+                    node.status({fill:"red",shape:"dot",text:RED._("feedparse.errors.failedparse")})
+                    return
+                }
                 if (node.sendarray === true) {
                     var msg = JSON.parse(JSON.stringify(feed))
                     node.send(msg)
