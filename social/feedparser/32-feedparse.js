@@ -41,7 +41,7 @@ module.exports = function(RED) {
                     return
                 }
                 if (!feed) {
-                    node.error("Failed Parse: "+node.url, error)
+                    node.error("Failed Parse: "+node.url, response.text() )
                     node.status({fill:"red",shape:"dot",text:RED._("feedparse.errors.failedparse")})
                     return
                 }
