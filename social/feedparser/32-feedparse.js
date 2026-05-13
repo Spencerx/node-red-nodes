@@ -31,10 +31,16 @@ module.exports = function(RED) {
                     node.status({fill:"red",shape:"dot",text:response.status+": "+RED._("feedparse.errors.badstatuscode")})
                     return
                 }
+                let feed;
                 try {
-                    const feed = parseFeed(await response.text())
+                    feed = parseFeed(await response.text())
                 }
                 catch (error) {
+                    node.error("Failed Parse: "+node.url, error)
+                    node.status({fill:"red",shape:"dot",text:RED._("feedparse.errors.failedparse")})
+                    return
+                }
+                if (!feed) {
                     node.error("Failed Parse: "+node.url, error)
                     node.status({fill:"red",shape:"dot",text:RED._("feedparse.errors.failedparse")})
                     return
