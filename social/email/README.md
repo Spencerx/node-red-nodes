@@ -3,15 +3,9 @@ node-red-node-email
 
 <a href="http://nodered.org" target="info">Node-RED</a> nodes to send and receive simple emails.
 
-**v4 Breaking Change**
+**v6 Breaking Change**
 
-Version 4.x introduced a breaking change. Users of the email-mta node will have to re-enter any user/passwords used to authenticate incoming mail. This was caused by the existing property clashing with another internal users property. Apologies for the inconvenience.
-
-**Notes** :
-    Version 3.x of this node requires **Node.js v18** or newer.
-    Version 2.x of this node requires **Node.js v16** or newer.
-    Version 1.91 of this node required **Node.js v14** or newer.
-    Previous versions of this node required **Node.js v8** or newer.
+The underlying nodemailer library has introduced a breaking change which by default enforces checking for valid TLS certs. This can be turned off per connection, but is opposite to the previous default.
 
 Pre-requisite
 -------------
