@@ -427,7 +427,15 @@ module.exports = function (RED) {
                         connTimeout: tout,
                         authTimeout: tout
                     });
-                } else {
+                }
+                else {
+                    if (node.authtype === "BASIC" && (!node.userid || !node.password)) {
+                        node.status({ fill: "red", shape: "ring", text: "missing credentials" });
+                        node.error("Missing e-mail username or password",msg);
+                        setInputRepeatTimeout();
+                        safeDone(new Error("Missing e-mail username or password"));
+                        return;
+                    }
                     imap = new Imap({
                         user: node.userid,
                         password: node.password,
@@ -660,7 +668,7 @@ module.exports = function (RED) {
                 }
 
             }
-            
+
             imap.connect();
         } // End of checkIMAP
 
