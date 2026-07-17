@@ -44,7 +44,8 @@ module.exports = function(RED) {
                     connectionLimit: RED.settings.mysqlConnectionLimit || 50,
                     connectTimeout: 30000,
                     charset: node.charset,
-                    decimalNumbers: true
+                    decimalNumbers: true,
+                    jsonStrings: true
                 });
             }
 
