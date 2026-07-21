@@ -45,7 +45,7 @@ module.exports = function(RED) {
                     connectTimeout: 30000,
                     charset: node.charset,
                     decimalNumbers: true,
-                    jsonStrings: true
+                    jsonStrings: false
                 });
             }
 
